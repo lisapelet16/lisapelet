@@ -104,7 +104,7 @@ export default function Navbar() {
         <div className="p-6 mt-auto">
           <a href="tel:4440000" className="block bg-gradient-to-br from-stone-900 to-stone-950 p-5 rounded-3xl border border-stone-800 relative overflow-hidden group cursor-pointer hover:border-orange-500/50 transition-colors">
             <div className="absolute inset-0 bg-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <p className="text-xs text-stone-400 font-medium uppercase tracking-wider mb-2">Hızlı Destek</p>
+            <p className="text-xs text-stone-400 font-medium uppercase tracking-wider mb-2">Hemen Arayın.</p>
             <p className="text-white font-bold flex items-center gap-2 group-hover:text-orange-400 transition-colors">
               <Phone size={16} /> 444 0 000
             </p>

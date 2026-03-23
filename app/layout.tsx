@@ -1,42 +1,46 @@
 import type { Metadata } from "next";
-// Ortamdaki font çözümleme hatasını engellemek için font importunu şimdilik yorum satırına alıyoruz
-// import { Inter } from "next/font/google";
+// 1. Modern yazı tipini Google Fonts üzerinden içe aktarıyoruz
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-// Dosya yollarını projenizdeki dizin yapısına göre (root/components) en güvenli şekilde güncelliyoruz
+// Kendi bileşenlerinizin içe aktarımları (Projenizdeki yollara göre ayarlayabilirsiniz)
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-// const inter = Inter({ subsets: ["latin"] });
+// 2. Yazı tipi ayarlarını yapılandırıyoruz
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin", "latin-ext"], // Türkçe karakter desteği için
+  display: "swap",                 // Yüklenme sırasında metinlerin görünür kalmasını sağlar
+  weight: ["300", "400", "500", "600", "700"], // İhtiyaç duyulan kalınlıklar
+});
 
 export const metadata: Metadata = {
-  title: "Lisa Pelet - Kaliteli ve Ekonomik Yakıt Çözümleri",
-  description: "Bursa'da yüksek kaliteli pelet üretimi ve satışı. Doğal, çevreci ve yüksek verimli ısınma çözümleri.",
+  title: "Lisa Pelet",
+  description: "Lisa Pelet Kurumsal Web Sitesi",
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="tr">
-      <body className="bg-white text-gray-900 flex flex-col min-h-screen" style={{ fontFamily: 'sans-serif' }}>
-        {/* Navbar bileşeni sabit (fixed) konumdadır */}
+      {/* 3. className içerisine plusJakarta.className ekleyerek fontu tüm siteye uyguluyoruz.
+        'antialiased' sınıfı (Tailwind) yazı kenarlarını yumuşatarak Apple cihazlarındaki gibi pürüzsüz ve modern bir görünüm katar.
+      */}
+      <body className={`${plusJakarta.className} antialiased min-h-screen flex flex-col bg-white text-slate-900`}>
         <Navbar />
         
-        {/* HEM MOBİL HEM MASAÜSTÜ İÇİN DÜZENLEME:
-          1. Mobil (Üst Navbar): pt-20 (padding-top) kullanarak içeriği üstteki Navbar'ın altından başlatıyoruz.
-          2. Masaüstü (Yan Sidebar): 
-             - md:pt-0: Üstteki boşluğu sıfırlıyoruz çünkü Navbar artık yanda.
-             - md:pl-64: Navbar sol tarafta bir sidebar (yan menü) olduğu için içeriği soldan 64 birim (256px) sağa kaydırıyoruz.
+        {/* İçerik ve Footer'ı saran ortak kapsayıcı 
+            - Masaüstünde Navbar solda sabit olduğu için (md:pl-64) hem ana içeriği hem de footer'ı beraber sağa kaydırıyoruz.
         */}
-        <main className="flex-grow pt-20 md:pt-0 md:pl-64">
-          {children}
-        </main>
-
-        {/* Footer'ın da Sidebar genişliği kadar soldan boşluk bırakması gerekir */}
-        <div className="md:pl-64">
+        <div className="flex flex-col flex-grow md:pl-64">
+          {/* pt-16 ile mobil görünümdeki boşluğu azalttık (önceden pt-24'tü) */}
+          <main className="flex-grow pt-16 md:pt-0">
+            {children}
+          </main>
+          
           <Footer />
         </div>
       </body>
