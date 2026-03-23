@@ -26,7 +26,8 @@ export default function Navbar() {
             src="/beyaz-logo.png" 
             alt="Lisa Pelet Logo" 
             width={120} 
-            height={40} 
+            height={40}
+            priority
             className="object-contain"
           />
         </Link>

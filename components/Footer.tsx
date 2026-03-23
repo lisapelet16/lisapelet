@@ -18,7 +18,8 @@ export default function Footer() {
               src="/beyaz-logo.png" 
               alt="Lisa Pelet Logo" 
               width={140} 
-              height={140} 
+              height={140}
+              priority 
               className="object-contain transition-transform duration-300 group-hover:scale-105"
             />
           </Link>
