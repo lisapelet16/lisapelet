@@ -26,7 +26,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h4 className="text-stone-500 font-bold uppercase tracking-wider text-sm mb-2">Telefon</h4>
-                  <p className="text-2xl font-black">+90 (555) 123 45 67</p>
+                  <p className="text-2xl font-black">+90 (545) 654 93 90</p>
                 </div>
               </div>
 
@@ -36,7 +36,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h4 className="text-stone-500 font-bold uppercase tracking-wider text-sm mb-2">E-Posta</h4>
-                  <p className="text-xl font-medium">info@lisapelet.com</p>
+                  <p className="text-xl font-medium">lisa.pelet16@gmail.com</p>
                 </div>
               </div>
 
@@ -46,7 +46,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h4 className="text-stone-500 font-bold uppercase tracking-wider text-sm mb-2">Adres</h4>
-                  <p className="text-lg font-medium leading-relaxed">Organize Sanayi Bölgesi<br/>1. Cadde No: 15<br/>Nilüfer / Bursa</p>
+                  <p className="text-lg font-medium leading-relaxed">Deneme Mah.<br/>Deneme Cad. Deneme Sk.<br/>Osmangazi / Bursa</p>
                 </div>
               </div>
             </div>
@@ -71,8 +71,7 @@ export default function ContactPage() {
                 <label className="text-sm font-bold text-stone-700 ml-2">İlgilendiğiniz Konu</label>
                 <select className="w-full px-6 py-4 bg-stone-50 border-2 border-stone-100 rounded-2xl focus:bg-white focus:border-orange-500 outline-none transition-all font-medium text-stone-700 appearance-none cursor-pointer">
                   <option>15 KG Sipariş Bilgisi</option>
-                  <option>Toptan Big Bag Fiyatı</option>
-                  <option>Bayilik Başvurusu</option>
+                  <option>25 KG Sipariş Bilgisi</option>
                   <option>Diğer Konular</option>
                 </select>
               </div>

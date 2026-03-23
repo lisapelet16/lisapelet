@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Flame, Leaf, Wind, ArrowRight, Zap, ShieldCheck } from 'lucide-react';
+import { Flame, Leaf, Wind, ArrowRight, Recycle, ShieldCheck } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -51,11 +51,11 @@ export default function Home() {
             
             <div className="absolute bottom-10 -left-10 bg-stone-900/95 backdrop-blur-md border border-stone-700 p-6 rounded-3xl shadow-2xl flex items-center gap-4 hover:animate-none z-20">
               <div className="w-14 h-14 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white shrink-0">
-                <Zap size={24} />
+                <Recycle size={24} />
               </div>
               <div>
-                <p className="text-stone-400 text-sm font-medium">Maksimum Verim</p>
-                <p className="text-white font-black text-xl">5200 kcal/kg</p>
+                <p className="text-stone-400 text-sm font-medium">Geri Dönüşümün</p>
+                <p className="text-white font-black text-xl">Zirvesi</p>
               </div>
             </div>
           </div>
