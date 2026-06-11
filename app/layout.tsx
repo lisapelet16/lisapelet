@@ -1,22 +1,23 @@
 import type { Metadata } from "next";
-// 1. Modern yazı tipini Google Fonts üzerinden içe aktarıyoruz
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-
-// Kendi bileşenlerinizin içe aktarımları (Projenizdeki yollara göre ayarlayabilirsiniz)
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-// 2. Yazı tipi ayarlarını yapılandırıyoruz
 const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ["latin", "latin-ext"], // Türkçe karakter desteği için
-  display: "swap",                 // Yüklenme sırasında metinlerin görünür kalmasını sağlar
-  weight: ["300", "400", "500", "600", "700"], // İhtiyaç duyulan kalınlıklar
+  subsets: ["latin", "latin-ext"],
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-plus-jakarta",
 });
 
 export const metadata: Metadata = {
-  title: "Lisa Pelet",
-  description: "Lisa Pelet Kurumsal Web Sitesi",
+  title: {
+    default: "Lisa Pelet | Premium Çam Peleti",
+    template: "%s | Lisa Pelet",
+  },
+  description:
+    "Sobalar için yüksek kalorili, düşük kül oranlı premium çam peleti. 15 kg ve 25 kg ambalaj seçenekleriyle Bursa ve çevresine teslimat.",
 };
 
 export default function RootLayout({
@@ -25,24 +26,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr">
-      {/* 3. className içerisine plusJakarta.className ekleyerek fontu tüm siteye uyguluyoruz.
-        'antialiased' sınıfı (Tailwind) yazı kenarlarını yumuşatarak Apple cihazlarındaki gibi pürüzsüz ve modern bir görünüm katar.
-      */}
-      <body className={`${plusJakarta.className} antialiased min-h-screen flex flex-col bg-white text-slate-900`}>
+    <html lang="tr" className={plusJakarta.variable}>
+      <body className={`${plusJakarta.className} antialiased`}>
         <Navbar />
-        
-        {/* İçerik ve Footer'ı saran ortak kapsayıcı 
-            - Masaüstünde Navbar solda sabit olduğu için (md:pl-64) hem ana içeriği hem de footer'ı beraber sağa kaydırıyoruz.
-        */}
-        <div className="flex flex-col flex-grow md:pl-64">
-          {/* pt-16 ile mobil görünümdeki boşluğu azalttık (önceden pt-24'tü) */}
-          <main className="flex-grow pt-16 md:pt-0">
-            {children}
-          </main>
-          
-          <Footer />
-        </div>
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

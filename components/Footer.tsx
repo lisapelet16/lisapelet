@@ -1,73 +1,77 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { Flame, ArrowUpRight } from 'lucide-react';
+import Link from "next/link";
+import { Mail, MapPin, Phone } from "lucide-react";
+import Logo from "./Logo";
+import WhatsAppLink from "./WhatsAppLink";
+import { companyEmail, companyLocation, contactPeople } from "../data/contact";
+
+const navLinks = [
+  { href: "/", label: "Ana Sayfa" },
+  { href: "/urunler", label: "Ürünler" },
+  { href: "/hakkimizda", label: "Hakkımızda" },
+  { href: "/iletisim", label: "İletişim" },
+];
 
 export default function Footer() {
   return (
-    <footer className="bg-stone-950 border-t border-stone-900 text-stone-400 pt-16 pb-24 md:pb-20 px-8 lg:px-16 shrink-0 relative overflow-hidden">
-      {/* DÜZELTME: mt-auto kaldırıldı, flex yapısında ezilmemesi için shrink-0 eklendi. Alt boşluk (pb-24 ve md:pb-20) artırılarak tarayıcı kesilmelerine karşı "güvenli alan" oluşturuldu. */}
-      {/* Arka plan dekoratif ateş efekti */}
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-orange-600/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
+    <footer className="border-t border-stone-800/60 bg-stone-950 text-stone-400">
+      <div className="container-main px-4 py-10 md:py-11">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-10">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-8 lg:gap-10">
+            <Logo variant="light" size="md" className="shrink-0" />
 
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-start gap-12 relative z-10">
-        
-        {/* Sol Alan - Logo ve Açıklama */}
-        <div className="max-w-sm">
-          <Link href="/" className="block mb-6 group w-max">
-            <Image 
-              src="/beyaz-logo.png" 
-              alt="Lisa Pelet Logo" 
-              width={140} 
-              height={140}
-              priority 
-              className="object-contain transition-transform duration-300 group-hover:scale-105"
-            />
-          </Link>
-          <p className="text-stone-500 leading-relaxed font-medium text-sm">
-            Doğanın gücünü evlerinize taşıyan, sürdürülebilir ve yüksek enerjili premium pelet yakıtı. Gelecek için üretiyoruz.
-          </p>
+            <nav className="flex flex-col gap-2 text-sm">
+              {navLinks.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="transition-colors hover:text-white"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          <ul className="flex flex-col gap-4 text-sm lg:items-end">
+            {contactPeople.map((person) => (
+              <li key={person.name} className="lg:text-right">
+                <p className="font-medium text-stone-300">{person.name}</p>
+                <div className="mt-1 flex items-center gap-2 lg:justify-end">
+                  <a
+                    href={`tel:${person.phoneTel}`}
+                    className="inline-flex items-center gap-1.5 transition-colors hover:text-white"
+                  >
+                    <Phone size={14} className="shrink-0 text-orange-500/80" />
+                    {person.phoneDisplay}
+                  </a>
+                  <WhatsAppLink
+                    phoneTel={person.phoneTel}
+                    personName={person.name}
+                    size="sm"
+                  />
+                </div>
+              </li>
+            ))}
+            <li className="flex flex-col gap-2 border-t border-stone-800/60 pt-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-5 sm:gap-y-2 lg:justify-end">
+              <a
+                href={`mailto:${companyEmail}`}
+                className="inline-flex items-center gap-1.5 transition-colors hover:text-white"
+              >
+                <Mail size={14} className="shrink-0 text-orange-500/80" />
+                {companyEmail}
+              </a>
+              <span className="inline-flex items-center gap-1.5">
+                <MapPin size={14} className="shrink-0 text-orange-500/80" />
+                {companyLocation}
+              </span>
+            </li>
+          </ul>
         </div>
 
-        {/* Sağ Alan - Bağlantılar */}
-        <div className="grid grid-cols-2 gap-12 md:gap-24 w-full lg:w-auto">
-          {/* Menü */}
-          <div>
-            <h4 className="text-white font-bold mb-6 tracking-wider uppercase text-sm">Menü</h4>
-            <ul className="space-y-3 text-sm font-medium">
-              <li>
-                <Link href="/hakkimizda" className="hover:text-orange-500 transition-colors flex items-center gap-1 group w-max">
-                  Hakkımızda <ArrowUpRight size={14} className="opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all" />
-                </Link>
-              </li>
-              <li>
-                <Link href="/urunler" className="hover:text-orange-500 transition-colors flex items-center gap-1 group w-max">
-                  Ürünler <ArrowUpRight size={14} className="opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all" />
-                </Link>
-              </li>
-              <li>
-                <Link href="/iletisim" className="hover:text-orange-500 transition-colors flex items-center gap-1 group w-max">
-                  İletişim <ArrowUpRight size={14} className="opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all" />
-                </Link>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Sosyal Medya */}
-          <div>
-            <h4 className="text-white font-bold mb-6 tracking-wider uppercase text-sm">Sosyal</h4>
-            <ul className="space-y-3 text-sm font-medium">
-              <li><a href="#" className="hover:text-orange-500 transition-colors block w-max">Instagram</a></li>
-              <li><a href="#" className="hover:text-orange-500 transition-colors block w-max">LinkedIn</a></li>
-              <li><a href="#" className="hover:text-orange-500 transition-colors block w-max">Facebook</a></li>
-            </ul>
-          </div>
+        <div className="mt-6 flex flex-col items-center justify-between gap-1 border-t border-stone-800/50 py-2.5 text-[11px] leading-tight text-stone-600 sm:flex-row">
+          <p>&copy; {new Date().getFullYear()} Lisa Pelet</p>
+          <p className="text-stone-700">Sıcaklığın en doğal hali.</p>
         </div>
-      </div>
-
-      {/* Alt Bilgi (Copyright) */}
-      <div className="max-w-7xl mx-auto mt-12 pt-6 border-t border-stone-800/50 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium relative z-10">
-        <p>&copy; {new Date().getFullYear()} Lisa Pelet. Tüm hakları saklıdır.</p>
-        <p className="text-stone-600">Sıcaklığın En Doğal Hali</p>
       </div>
     </footer>
   );

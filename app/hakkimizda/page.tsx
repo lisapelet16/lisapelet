@@ -1,63 +1,112 @@
-import { Target, Lightbulb, Users } from 'lucide-react';
+import type { Metadata } from "next";
+import Image from "next/image";
+import { Lightbulb, Target, Users } from "lucide-react";
+import PageHeader from "../../components/PageHeader";
+import Reveal from "../../components/motion/Reveal";
+import Stagger, { StaggerItem } from "../../components/motion/Stagger";
+
+export const metadata: Metadata = {
+  title: "Hakkımızda",
+  description:
+    "Lisa Pelet'in hikayesi, misyonu ve değerleri. Bursa'da sürdürülebilir pelet üretimi.",
+};
+
+const values = [
+  {
+    icon: Target,
+    title: "Misyonumuz",
+    description:
+      "Tüketicilere en ekonomik, en temiz ve en yüksek kalorili ısıtma çözümünü sunmak.",
+    color: "bg-stone-900",
+  },
+  {
+    icon: Lightbulb,
+    title: "Vizyonumuz",
+    description:
+      "Yenilenebilir enerjide Türkiye'nin lider ve en güvenilir pelet markası olmak.",
+    color: "bg-orange-600",
+  },
+  {
+    icon: Users,
+    title: "Değerlerimiz",
+    description:
+      "Dürüst ticaret, müşteri memnuniyeti ve doğaya koşulsuz saygı.",
+    color: "bg-amber-500",
+  },
+];
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-stone-50">
-      
-      {/* Başlık Alanı */}
-      <div className="bg-stone-950 text-white pt-24 pb-32 px-8 lg:px-16 rounded-b-[3rem] relative overflow-hidden">
-        <div className="absolute top-[-50%] right-[-10%] w-[80%] h-[200%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-stone-800/50 to-transparent rotate-12 pointer-events-none"></div>
-        <div className="max-w-5xl mx-auto text-center relative z-10">
-          <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight">Gelecek İçin <br/><span className="text-orange-500">Üretiyoruz.</span></h1>
-          <p className="text-xl text-stone-400 font-light max-w-2xl mx-auto">Sıcaklığın kaynağı doğadır dedik ve yola çıktık. Lisa Pelet'in hikayesine hoş geldiniz.</p>
-        </div>
-      </div>
+    <>
+      <PageHeader
+        eyebrow="Hikayemiz"
+        title="Gelecek için"
+        highlight="üretiyoruz."
+        description="Sıcaklığın kaynağı doğadır. Lisa Pelet olarak bu inançla yola çıktık."
+      />
 
-      {/* İçerik Alanı */}
-      <div className="max-w-5xl mx-auto px-8 lg:px-16 -mt-16 relative z-20 pb-24">
-        
-        {/* Ana Hikaye Kartı */}
-        <div className="bg-white rounded-[3rem] p-10 md:p-16 shadow-2xl border border-stone-100 mb-20 flex flex-col md:flex-row gap-12 items-center">
-          <div className="flex-1 space-y-6 text-stone-600 text-lg leading-relaxed font-medium">
-            <p>
-              <strong className="text-stone-900 font-black text-2xl">Lisa Pelet</strong> olarak, sadece bir yakıt değil, bir ısınma kültürü üretiyoruz. Modern dünyamızın artan enerji ihtiyaçlarını karşılarken, yegane evimiz olan dünyamızı korumak zorundayız.
-            </p>
-            <p>
-              Kurduğumuz son teknoloji üretim tesisimizde, orman ürünleri endüstrisinin artıklarını alıp, onlara hiçbir kimyasal veya tutkal eklemeden devasa basınçlarla presliyoruz. Çam ağacının kendi öz suyu, peletlerimizin bir arada durmasını sağlıyor.
-            </p>
-          </div>
-          <div className="w-full md:w-1/2 aspect-square bg-stone-100 rounded-[2rem] flex items-center justify-center border-4 border-white shadow-inner overflow-hidden relative group">
-            <div className="absolute inset-0 bg-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <span className="text-stone-400 font-bold tracking-widest"></span>
-          </div>
-        </div>
+      <section className="section-padding relative z-20 !pt-0">
+        <div className="container-main page-content-overlap max-w-4xl">
+          <Reveal>
+            <div className="card-hover overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
+              <div className="relative h-56 md:h-72">
+                <Image
+                  src="/images/about-factory.png"
+                  alt="Lisa Pelet üretim tesisi"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 896px) 100vw, 896px"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-stone-900/60 to-transparent" />
+              </div>
+              <div className="p-8 md:p-12">
+                <h2 className="mb-6 text-2xl font-extrabold text-stone-900">
+                  Kimiz?
+                </h2>
+                <div className="space-y-5 text-stone-600 leading-relaxed">
+                  <p>
+                    <strong className="text-stone-900">Lisa Pelet</strong> olarak
+                    sadece bir yakıt değil, sürdürülebilir bir ısınma kültürü
+                    üretiyoruz. Artan enerji ihtiyaçlarını karşılarken çevreyi
+                    korumayı da öncelik haline getirdik.
+                  </p>
+                  <p>
+                    Bursa&apos;daki üretim tesisimizde, orman ürünleri
+                    endüstrisinin artıklarını hiçbir kimyasal veya tutkal
+                    eklemeden yüksek basınçla presliyoruz. Çam ağacının kendi öz
+                    suyu, peletlerimizin bir arada durmasını sağlıyor.
+                  </p>
+                  <p>
+                    Her parti üretimimiz kalite kontrolünden geçer; nem, kül ve
+                    çap ölçümleri standartlarımızın altında kalmayan ürünler
+                    müşterilerimize ulaşır.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
 
-        {/* Vizyon & Misyon */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-white p-10 rounded-[2rem] border border-stone-100 hover:shadow-xl transition-shadow">
-            <div className="w-14 h-14 bg-stone-950 text-white rounded-2xl flex items-center justify-center mb-6">
-              <Target size={24} />
-            </div>
-            <h3 className="text-2xl font-black text-stone-900 mb-4">Misyonumuz</h3>
-            <p className="text-stone-500 font-medium">Tüketicilere en ekonomik, en temiz ve en yüksek kalorili ısıtma çözümünü sunmak.</p>
-          </div>
-          <div className="bg-white p-10 rounded-[2rem] border border-stone-100 hover:shadow-xl transition-shadow">
-            <div className="w-14 h-14 bg-orange-500 text-white rounded-2xl flex items-center justify-center mb-6">
-              <Lightbulb size={24} />
-            </div>
-            <h3 className="text-2xl font-black text-stone-900 mb-4">Vizyonumuz</h3>
-            <p className="text-stone-500 font-medium">Yenilenebilir enerjide Türkiye'nin lider ve en güvenilir pelet markası olmak.</p>
-          </div>
-          <div className="bg-white p-10 rounded-[2rem] border border-stone-100 hover:shadow-xl transition-shadow">
-            <div className="w-14 h-14 bg-amber-500 text-white rounded-2xl flex items-center justify-center mb-6">
-              <Users size={24} />
-            </div>
-            <h3 className="text-2xl font-black text-stone-900 mb-4">Değerlerimiz</h3>
-            <p className="text-stone-500 font-medium">Dürüst ticaret, %100 müşteri memnuniyeti ve doğaya koşulsuz saygı.</p>
-          </div>
+          <Stagger className="mt-10 grid gap-6 md:grid-cols-3" stagger={0.12}>
+            {values.map((item) => (
+              <StaggerItem key={item.title}>
+                <div className="card-hover card-glow h-full rounded-2xl border border-stone-200 bg-white p-7">
+                  <div
+                    className={`mb-5 flex h-12 w-12 items-center justify-center rounded-xl text-white transition-transform hover:scale-110 ${item.color}`}
+                  >
+                    <item.icon size={22} />
+                  </div>
+                  <h3 className="mb-2 text-lg font-bold text-stone-900">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-stone-600 leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              </StaggerItem>
+            ))}
+          </Stagger>
         </div>
-
-      </div>
-    </div>
+      </section>
+    </>
   );
 }

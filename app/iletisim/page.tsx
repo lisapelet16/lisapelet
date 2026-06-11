@@ -1,95 +1,123 @@
-"use client";
-import { MapPin, Phone, Mail, Send } from 'lucide-react';
+import type { Metadata } from "next";
+import { Mail, MapPin, Phone, User } from "lucide-react";
+import PageHeader from "../../components/PageHeader";
+import ContactForm from "../../components/ContactForm";
+import Reveal from "../../components/motion/Reveal";
+import WhatsAppLink from "../../components/WhatsAppLink";
+import {
+  companyEmail,
+  companyLocation,
+  contactPeople,
+} from "../../data/contact";
+
+export const metadata: Metadata = {
+  title: "İletişim",
+  description:
+    "Lisa Pelet sipariş ve toptan satış hattı. Levent ve Mert PEHLİVAN ile iletişime geçin.",
+};
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-stone-50 py-24 px-8 lg:px-16 animate-in fade-in duration-700">
-      <div className="max-w-7xl mx-auto">
-        
-        <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-7xl font-black text-stone-900 mb-6 tracking-tight">İletişim</h1>
-          <p className="text-xl text-stone-500 font-medium">Bize ulaşmak çok kolay. Sorularınız, siparişleriniz veya toptan teklifleriniz için yanınızdayız.</p>
-        </div>
+    <>
+      <PageHeader
+        eyebrow="Bize Ulaşın"
+        title="Sorularınız için"
+        highlight="buradayız."
+        description="Sipariş, fiyat teklifi veya toptan alım talepleriniz için formu doldurun ya da doğrudan arayın."
+      />
 
-        <div className="bg-white rounded-[3rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] border border-stone-100 overflow-hidden flex flex-col xl:flex-row">
-          
-          {/* Sol Panel - İletişim Bilgileri */}
-          <div className="bg-stone-950 text-white p-12 lg:p-16 xl:w-2/5 relative overflow-hidden">
-            <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-orange-600/20 blur-[80px] rounded-full"></div>
-            
-            <h3 className="text-3xl font-black mb-12 relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-500">Bize Ulaşın</h3>
-            
-            <div className="space-y-12 relative z-10">
-              <div className="group flex gap-6">
-                <div className="w-16 h-16 bg-stone-900 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-orange-600 transition-colors duration-500">
-                  <Phone className="text-orange-500 group-hover:text-white transition-colors" size={28} />
-                </div>
-                <div>
-                  <h4 className="text-stone-500 font-bold uppercase tracking-wider text-sm mb-2">Telefon</h4>
-                  <p className="text-2xl font-black">+90 (545) 654 93 90</p>
-                </div>
-              </div>
+      <section className="section-padding relative z-[2] isolate !pt-0">
+        <div className="container-main page-content-overlap">
+          <Reveal>
+            <div className="card-hover relative z-30 overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
+              <div className="grid xl:grid-cols-5">
+                <div className="bg-stone-900 p-5 text-white sm:p-8 xl:col-span-2 xl:p-10">
+                  <h2 className="mb-5 text-lg font-bold sm:mb-6 sm:text-xl">
+                    İletişim Kişileri
+                  </h2>
 
-              <div className="group flex gap-6">
-                <div className="w-16 h-16 bg-stone-900 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-orange-600 transition-colors duration-500">
-                  <Mail className="text-orange-500 group-hover:text-white transition-colors" size={28} />
-                </div>
-                <div>
-                  <h4 className="text-stone-500 font-bold uppercase tracking-wider text-sm mb-2">E-Posta</h4>
-                  <p className="text-xl font-medium">lisa.pelet16@gmail.com</p>
-                </div>
-              </div>
+                  <div className="space-y-3 sm:space-y-4">
+                    {contactPeople.map((person) => (
+                      <div
+                        key={person.name}
+                        className="flex items-center gap-2.5 rounded-xl border border-stone-800 bg-stone-950/50 p-3.5 sm:gap-3 sm:p-4 transition-colors hover:border-orange-500/40 hover:bg-stone-800/80"
+                      >
+                        <a
+                          href={`tel:${person.phoneTel}`}
+                          className="group flex min-w-0 flex-1 items-center gap-3 sm:gap-4"
+                        >
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-stone-800 text-orange-400 transition-colors group-hover:bg-orange-600 group-hover:text-white sm:h-11 sm:w-11">
+                            <User size={18} />
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-sm font-bold text-white sm:text-base">
+                              {person.name}
+                            </p>
+                            <p className="mt-1 flex items-start gap-1.5 text-xs text-stone-400 group-hover:text-stone-300 sm:items-center sm:text-sm">
+                              <Phone
+                                size={14}
+                                className="mt-0.5 shrink-0 text-orange-400 sm:mt-0"
+                              />
+                              <span className="break-all leading-snug">
+                                {person.phoneDisplay}
+                              </span>
+                            </p>
+                          </div>
+                        </a>
+                        <WhatsAppLink
+                          phoneTel={person.phoneTel}
+                          personName={person.name}
+                          size="sm"
+                        />
+                      </div>
+                    ))}
+                  </div>
 
-              <div className="group flex gap-6">
-                <div className="w-16 h-16 bg-stone-900 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-orange-600 transition-colors duration-500">
-                  <MapPin className="text-orange-500 group-hover:text-white transition-colors" size={28} />
+                  <div className="mt-6 space-y-5 border-t border-stone-800 pt-6 sm:mt-8 sm:space-y-6 sm:pt-8">
+                    <a
+                      href={`mailto:${companyEmail}`}
+                      className="group flex gap-3 transition-opacity hover:opacity-80 sm:gap-4"
+                    >
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-stone-800 text-orange-400 transition-colors group-hover:bg-orange-600 group-hover:text-white sm:h-11 sm:w-11">
+                        <Mail size={18} />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-xs font-semibold uppercase tracking-wider text-stone-500">
+                          E-posta
+                        </p>
+                        <p className="mt-1 break-all text-sm font-medium sm:text-base">
+                          {companyEmail}
+                        </p>
+                      </div>
+                    </a>
+
+                    <div className="flex gap-3 sm:gap-4">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-stone-800 text-orange-400 sm:h-11 sm:w-11">
+                        <MapPin size={18} />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-xs font-semibold uppercase tracking-wider text-stone-500">
+                          Adres
+                        </p>
+                        <p className="mt-1 font-medium leading-relaxed text-stone-300">
+                          {companyLocation}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-stone-500 font-bold uppercase tracking-wider text-sm mb-2">Adres</h4>
-                  <p className="text-lg font-medium leading-relaxed">Deneme Mah.<br/>Deneme Cad. Deneme Sk.<br/>Osmangazi / Bursa</p>
+
+                <div className="p-5 sm:p-8 xl:col-span-3 xl:p-10">
+                  <h2 className="mb-5 text-balance text-lg font-bold text-stone-900 sm:mb-6 sm:text-xl">
+                    Mesaj gönderin biz sizi arayalım.
+                  </h2>
+                  <ContactForm />
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* Sağ Panel - Form */}
-          <div className="p-12 lg:p-16 xl:w-3/5">
-            <h3 className="text-3xl font-black text-stone-900 mb-8">Mesaj Gönder</h3>
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-stone-700 ml-2">Ad Soyad</label>
-                  <input type="text" className="w-full px-6 py-4 bg-stone-50 border-2 border-stone-100 rounded-2xl focus:bg-white focus:border-orange-500 outline-none transition-all font-medium text-stone-700 placeholder:text-stone-400" placeholder="Adınız Soyadınız" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-stone-700 ml-2">Telefon</label>
-                  <input type="tel" className="w-full px-6 py-4 bg-stone-50 border-2 border-stone-100 rounded-2xl focus:bg-white focus:border-orange-500 outline-none transition-all font-medium text-stone-700 placeholder:text-stone-400" placeholder="05XX XXX XX XX" />
-                </div>
-              </div>
-              
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-stone-700 ml-2">İlgilendiğiniz Konu</label>
-                <select className="w-full px-6 py-4 bg-stone-50 border-2 border-stone-100 rounded-2xl focus:bg-white focus:border-orange-500 outline-none transition-all font-medium text-stone-700 appearance-none cursor-pointer">
-                  <option>15 KG Sipariş Bilgisi</option>
-                  <option>25 KG Sipariş Bilgisi</option>
-                  <option>Diğer Konular</option>
-                </select>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-stone-700 ml-2">Mesajınız</label>
-                <textarea rows={5} className="w-full px-6 py-4 bg-stone-50 border-2 border-stone-100 rounded-2xl focus:bg-white focus:border-orange-500 outline-none transition-all font-medium text-stone-700 placeholder:text-stone-400 resize-none" placeholder="Size nasıl yardımcı olabiliriz?"></textarea>
-              </div>
-              
-              <button type="submit" className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-5 px-10 rounded-2xl transition-all shadow-lg hover:shadow-[0_10px_30px_rgba(234,88,12,0.4)] flex items-center justify-center gap-3 w-full md:w-auto">
-                <Send size={20} />
-                Gönder
-              </button>
-            </form>
-          </div>
-
+          </Reveal>
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 }
