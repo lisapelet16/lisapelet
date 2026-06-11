@@ -2,11 +2,14 @@ import { NextResponse } from "next/server";
 import { verifyRecaptcha } from "../../../lib/recaptcha";
 import { formatTurkishPhone, isValidTurkishPhone } from "../../../lib/phone";
 
-type ContactPayload = {
+type TelegramMessageData = {
   name: string;
   phone: string;
   subject: string;
   message: string;
+};
+
+type ContactPayload = TelegramMessageData & {
   recaptchaToken: string;
   website?: string;
 };
@@ -18,7 +21,7 @@ function escapeHtml(text: string) {
     .replace(/>/g, "&gt;");
 }
 
-function buildTelegramMessage(data: ContactPayload) {
+function buildTelegramMessage(data: TelegramMessageData) {
   return [
     "🔔 <b>Yeni İletişim Formu</b>",
     "",
