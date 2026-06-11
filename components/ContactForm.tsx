@@ -1,8 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useRef, useState } from "react";
-import type ReCAPTCHA from "react-google-recaptcha";
+import { useState } from "react";
 import { CheckCircle2, Loader2, Send } from "lucide-react";
 import {
   formatTurkishPhoneInput,
@@ -32,7 +31,8 @@ const initialForm = {
 const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "";
 
 export default function ContactForm() {
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const [recaptchaKey, setRecaptchaKey] = useState(0);
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
     "idle",
@@ -83,8 +83,6 @@ export default function ContactForm() {
       return;
     }
 
-    const recaptchaToken = recaptchaRef.current?.getValue();
-
     if (!recaptchaToken) {
       setStatus("error");
       setErrorMessage("Lütfen robot olmadığınızı doğrulayın.");
@@ -104,12 +102,14 @@ export default function ContactForm() {
       const data = (await response.json()) as { error?: string };
 
       if (!response.ok) {
-        recaptchaRef.current?.reset();
+        setRecaptchaToken(null);
+        setRecaptchaKey((key) => key + 1);
         throw new Error(data.error ?? "Mesaj gönderilemedi.");
       }
 
       setForm(initialForm);
-      recaptchaRef.current?.reset();
+      setRecaptchaToken(null);
+      setRecaptchaKey((key) => key + 1);
       setStatus("success");
     } catch (error) {
       setStatus("error");
@@ -225,7 +225,12 @@ export default function ContactForm() {
       {siteKey ? (
         <div className="flex justify-center overflow-hidden rounded-xl border border-stone-200 bg-stone-50 p-2 sm:p-3">
           <div className="origin-center scale-[0.9] sm:scale-100">
-            <ReCAPTCHAWidget ref={recaptchaRef} sitekey={siteKey} />
+            <ReCAPTCHAWidget
+              key={recaptchaKey}
+              sitekey={siteKey}
+              onChange={setRecaptchaToken}
+              onExpired={() => setRecaptchaToken(null)}
+            />
           </div>
         </div>
       ) : (
