@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Mail, MapPin, Phone, User } from "lucide-react";
 import PageHeader from "../../components/PageHeader";
 import ContactForm from "../../components/ContactForm";
@@ -9,12 +8,20 @@ import {
   companyLocation,
   contactPeople,
 } from "../../data/contact";
+import { createPageMetadata } from "../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "İletişim",
+export const metadata = createPageMetadata({
+  title: "İletişim ve Sipariş",
   description:
-    "Lisa Pelet sipariş ve toptan satış hattı. Levent ve Mert PEHLİVAN ile iletişime geçin.",
-};
+    "Bursa pelet siparişi ve toptan soba peleti teklifi için Lisa Pelet ile iletişime geçin. Kestel / Bursa teslimat, hızlı dönüş.",
+  path: "/iletisim",
+  keywords: [
+    "bursa pelet sipariş",
+    "pelet fiyat teklifi",
+    "toptan pelet iletişim",
+    "soba peleti bursa telefon",
+  ],
+});
 
 export default function ContactPage() {
   return (

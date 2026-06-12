@@ -1,15 +1,22 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import { Lightbulb, Target, Users } from "lucide-react";
 import PageHeader from "../../components/PageHeader";
 import Reveal from "../../components/motion/Reveal";
 import Stagger, { StaggerItem } from "../../components/motion/Stagger";
+import { createPageMetadata } from "../../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Hakkımızda",
   description:
-    "Lisa Pelet'in hikayesi, misyonu ve değerleri. Bursa'da sürdürülebilir pelet üretimi.",
-};
+    "Lisa Pelet: Bursa Kestel merkezli çam peleti ve soba peleti üreticisi. Sürdürülebilir üretim, yüksek kalite standartları ve güvenilir teslimat.",
+  path: "/hakkimizda",
+  keywords: [
+    "bursa pelet üreticisi",
+    "kestel pelet firması",
+    "çam peleti üretimi",
+    "lisa pelet hakkında",
+  ],
+});
 
 const values = [
   {

@@ -1,16 +1,24 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Check } from "lucide-react";
 import PageHeader from "../../components/PageHeader";
 import Reveal from "../../components/motion/Reveal";
 import Stagger, { StaggerItem } from "../../components/motion/Stagger";
+import { createPageMetadata } from "../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Ürünler",
+export const metadata = createPageMetadata({
+  title: "15 KG ve 25 KG Çam Peleti",
   description:
-    "15 kg ve 25 kg çam peleti çuval seçenekleri. Düşük kül, düşük nem, yüksek kalori.",
-};
+    "Bursa soba peleti: 15 kg ve 25 kg premium çam peleti çuval seçenekleri. Düşük kül, düşük nem, yüksek kalori. Ev ve toptan kullanım için Lisa Pelet.",
+  path: "/urunler",
+  keywords: [
+    "15 kg pelet",
+    "25 kg pelet",
+    "çam peleti fiyat",
+    "soba peleti bursa",
+    "toptan pelet",
+  ],
+});
 
 const specs = ["Çap: 6 mm / 8 mm", "Kül oranı: <%1", "Nem oranı: <%10"];
 
@@ -26,6 +34,8 @@ const products = [
     ctaStyle: "btn-primary w-full",
     cardStyle: "border-orange-200 bg-gradient-to-b from-orange-50/50 to-white",
     image: "/images/lisa-pelet-15kg.png",
+    imageAlt:
+      "Lisa Pelet 15 kg Bursa çam peleti soba peleti çuval ambalaj",
     imageStyle: "from-orange-100 to-orange-50",
   },
   {
@@ -40,6 +50,8 @@ const products = [
       "w-full rounded-full border-2 border-stone-200 bg-white py-3.5 font-semibold text-stone-900 transition-colors hover:border-orange-300 hover:bg-orange-50 text-center block",
     cardStyle: "border-stone-200 bg-white",
     image: "/images/lisa-pelet-25kg.png",
+    imageAlt:
+      "Lisa Pelet 25 kg toptan çam peleti Bursa endüstriyel pelet çuval",
     imageStyle: "from-stone-100 to-stone-50",
   },
 ];
@@ -72,7 +84,7 @@ export default function ProductsPage() {
                     </span>
                     <Image
                       src={product.image}
-                      alt={product.name}
+                      alt={product.imageAlt}
                       fill
                       priority={index === 0}
                       className="object-contain object-center scale-[1.18] transition-transform duration-500 group-hover:scale-[1.22] md:scale-[1.24] md:group-hover:scale-[1.28]"

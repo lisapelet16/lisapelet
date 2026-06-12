@@ -79,13 +79,18 @@ export default function HomeContent() {
 
               <h1 className="text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl">
                 <span className="text-gradient-animated">
-                  Doğadan Gelen Isı
+                  Bursa Çam Peleti
+                </span>
+                <span className="mt-2 block text-2xl font-bold text-white/90 sm:text-3xl lg:text-4xl">
+                  Premium soba peleti
                 </span>
               </h1>
 
               <p className="mt-6 max-w-lg text-lg text-stone-400">
-                Yüksek kaliteli çam peletimiz ile daha fazla ısı, daha uzun
-                yanma süresi ve maksimum tasarruf sağlayın.
+                Bursa ve Kestel&apos;de üretilen premium çam peletimiz; pelet
+                sobaları için düşük kül, yüksek kalori ve uzun yanma süresi
+                sunar. 15 kg ve 25 kg soba peleti seçenekleriyle hızlı
+                teslimat.
               </p>
 
               <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:items-center lg:items-start">
