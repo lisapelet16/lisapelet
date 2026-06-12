@@ -52,6 +52,9 @@ export const metadata: Metadata = {
     title: `${siteName} | Bursa Pelet ve Soba Peleti`,
     description: defaultDescription,
   },
+  verification: {
+    google: "mz9RnVtp5Atxnz-JwdMnyQldIuMRXs22p_ycYqtoEKU",
+  },
 };
 
 export default function RootLayout({
