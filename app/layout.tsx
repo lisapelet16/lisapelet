@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import JsonLd from "../components/JsonLd";
+import GoogleAnalytics from "../components/GoogleAnalytics";
 import { defaultDescription, defaultKeywords, siteName, siteUrl } from "../lib/site";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -75,6 +76,7 @@ export default function RootLayout({
   return (
     <html lang="tr" className={plusJakarta.variable}>
       <body className={`${plusJakarta.className} antialiased`}>
+        <GoogleAnalytics />
         <JsonLd />
         <Navbar />
         <main>{children}</main>
